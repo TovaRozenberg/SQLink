@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>ניהול המכירות שלי</h2>
+
+  <div *ngIf="myAuctions.length > 0; else emptyTemplate">
+    <table class="my-auctions-table">
+      <thead>
+        <tr>
+          <th>מוצר</th>
+          <th>מחיר נוכחי</th>
+          <th>תאריך סיום</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let auction of myAuctions">
+          <td>{{ auction.title }}</td>
+          <td>{{ auction.currentPrice | currency:'ILS' }}</td>
+          <td>{{ auction.endTime | date:'short' }}</td>
+          <td>
+            <button [routerLink]="['/auctions', auction.id]">צפה במצב</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyTemplate>
+    <p>עדיין לא פרסמת מכירות פומביות. <a routerLink="/auctions/create">פרסם אחת עכשיו!</a></p>
+  </ng-template>
+</div>

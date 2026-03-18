@@ -1,0 +1,29 @@
+<div class="create-container">
+  <h2>פרסום מכירה פומבית חדשה</h2>
+
+  <form [formGroup]="auctionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>כותרת המוצר:</label>
+      <input type="text" formControlName="title" placeholder="לדוגמה: מחשב נייד חזק">
+    </div>
+
+    <div class="form-group">
+      <label>תיאור מפורט:</label>
+      <textarea formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>מחיר התחלתי (ILS):</label>
+      <input type="number" formControlName="startingPrice">
+    </div>
+
+    <div class="form-group">
+      <label>תאריך ושעת סיום:</label>
+      <input type="datetime-local" formControlName="endTime" [min]="minDate">
+    </div>
+
+    <button type="submit" [disabled]="auctionForm.invalid" class="submit-btn">
+      צור מכירה עכשיו
+    </button>
+  </form>
+</div>

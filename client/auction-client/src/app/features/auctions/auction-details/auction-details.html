@@ -1,0 +1,30 @@
+<div *ngIf="auction" class="detail-container">
+  <h1>{{ auction.title }}</h1>
+  <div class="timer">זמן נותר: {{ timeLeft }}</div>
+  <div class="current-price">מחיר מוביל: {{ auction.currentPrice | currency:'ILS' }}</div>
+
+  <div *ngIf="authService.isLoggedIn(); else loginTemplate">
+    
+    <div *ngIf="auction.sellerId === authService.getCurrentUserId(); else bidForm" class="seller-msg">
+      <p>זו המכירה שלך. אתה יכול לצפות בביצועים אך לא להציע מחיר.</p>
+    </div>
+
+    <ng-template #bidForm>
+      <input type="number" [(ngModel)]="newBidAmount" [min]="auction.currentPrice + 1">
+      <button (click) ="placeBid()">הגש הצעת מחיר</button>
+    </ng-template>
+  </div>
+
+  <ng-template #loginTemplate>
+    <div class="login-alert">
+      כדי להציע מחיר, עליך <a routerLink="/login">להתחבר</a>.
+    </div>
+  </ng-template>
+
+  <h3>היסטוריית הצעות:</h3>
+  <ul>
+    <li *ngFor="let bid of bids">
+      {{ bid.bidderName }} הציע {{ bid.amount | currency:'ILS' }} ב-{{ bid.bidTime | date:'short' }}
+    </li>
+  </ul>
+</div>

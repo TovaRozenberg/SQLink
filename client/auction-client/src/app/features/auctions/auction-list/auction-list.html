@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="toolbar">
+    <input 
+      type="text" 
+      placeholder="חפש מכירה..." 
+      [(ngModel)]="searchTerm" 
+      (input)="applyFilters()"
+      class="search-input"
+    >
+
+    <select [(ngModel)]="sortBy" (change)="applyFilters()" class="sort-select">
+      <option value="newest">חדש ביותר</option>
+      <option value="priceLow">מחיר: מהנמוך לגבוה</option>
+      <option value="priceHigh">מחיר: מהגבוה לנמוך</option>
+    </select>
+  </div>
+
+  <div class="auction-grid">
+    <div *ngFor="let auction of filteredAuctions" class="auction-card">
+      <div class="card-image">
+        <img src="https://via.placeholder.com/300x200?text=Product" alt="Auction Image">
+      </div>
+      <div class="card-body">
+        <h3>{{ auction.title }}</h3>
+        <p class="description">{{ auction.description | slice:0:60 }}...</p>
+        <div class="price-tag">
+          מחיר נוכחי: <strong>{{ auction.currentPrice | currency:'ILS':'symbol' }}</strong>
+        </div>
+        <p class="end-time">מסתיים ב: {{ auction.endTime | date:'short' }}</p>
+        <button [routerLink]="['/auctions', auction.id]" class="bid-btn">לפרטים והגשת הצעה</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="filteredAuctions.length === 0" class="no-results">
+    לא נמצאו מכירות פומביות תואמות.
+  </div>
+</div>

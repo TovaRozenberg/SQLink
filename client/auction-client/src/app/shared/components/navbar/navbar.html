@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/">🔨 AuctionMaster</a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/">כל המכירות</a></li>
+    
+    <li *ngIf="authService.isLoggedIn()">
+      <a routerLink="/auctions/create">פרסם מכירה</a>
+    </li>
+    <li *ngIf="authService.isLoggedIn()">
+  <a routerLink="/my-auctions">המכירות שלי</a>
+</li>
+  </ul>
+
+  <div class="nav-auth">
+    <div *ngIf="authService.isLoggedIn(); else guestTemplate" class="user-info">
+      <span>שלום, <strong>{{ authService.getCurrentUserName() }}</strong></span>
+      <button (click)="onLogout()" class="logout-btn">התנתק</button>
+    </div>
+
+    <ng-template #guestTemplate>
+      <div class="guest-btns">
+        <a routerLink="/login" class="login-link">התחבר</a>
+        <a routerLink="/register" class="register-btn">הירשם</a>
+      </div>
+    </ng-template>
+  </div>
+</nav>
