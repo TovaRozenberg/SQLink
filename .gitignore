@@ -1,0 +1,46 @@
+## --- .NET / C# (Server) ---
+[Bb]in/
+[Oo]bj/
+[Log]s/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# הגדרות מקומיות של אפליקציה (כדי לא לחשוף סיסמאות למסד נתונים)
+appsettings.Development.json
+appsettings.Local.json
+
+# קבצי מסד נתונים מקומיים
+*.db
+*.db-shm
+*.db-wal
+
+## --- Angular / Node.js (Client) ---
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.editorconfig
+.prettierrc
+
+# קבצי הגדרות של סביבת עבודה
+.project
+.classpath
+.settings/
+.cache/
+
+## --- OS Specific (General) ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## --- User Uploads (חשוב לפרויקט שלך!) ---
+# אם את שומרת תמונות בתוך wwwroot/images, נרצה להתעלם מהתמונות עצמן 
+# אבל לשמור את מבנה התיקייה
+server/AuctionSystem.Api/wwwroot/images/*
+!server/AuctionSystem.Api/wwwroot/images/.gitkeep
